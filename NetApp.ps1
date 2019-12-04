@@ -6,7 +6,7 @@ if (Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion
     #Import-Module DataONTAP
     $AggregateResult = @()
     foreach ($singleNAcluster in $netappclusters){
-        Add-NcCredential $singleNAcluster -Credential $cred
+        Add-NcCredential $singleNAcluster -Credential $cred  | Out-Null
         Connect-NcController $singleNAcluster | Out-Null
         $Result = Get-NcAggr | Where-Object Name -NotLike "*root*" 
         foreach ($r in $Result) {
